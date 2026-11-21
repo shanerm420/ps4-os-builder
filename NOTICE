@@ -4,8 +4,10 @@ The scripts and documentation in this repository are MIT (see LICENSE).
 
 They fetch, and are meant to be used with, other people's work:
 
-  pkg/installer (the app)      OpenOrbis PS4 Toolchain, GPL-3.0, from
-                               github.com/shanerm420/ps4-linux-desktop
+  app/ (the installer)         OpenOrbis PS4 Toolchain, GPL-3.0. A copy of the
+                               app published in
+                               github.com/shanerm420/ps4-linux-desktop, kept in
+                               this repository so this project stands alone
   kernel (boot/bzImage)        Linux, GPL-2.0, from gitlab.com/rmuxnet/linux
                                branch ps4/7.3.4; sources at
                                github.com/shanerm420/ps4-linux-kernel

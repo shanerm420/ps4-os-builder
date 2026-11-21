@@ -1,5 +1,8 @@
-# fetched by scripts/vendor.sh
+# working copy made by scripts/vendor.sh (renamed app + staged assets)
 vendor/
+
+# fetched by scripts/get-stb.sh - third-party, ~200 KB, never edited
+app/ui/stb_truetype.h
 
 # build outputs
 out/

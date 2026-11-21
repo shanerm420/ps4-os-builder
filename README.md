@@ -4,8 +4,9 @@ Build your own Linux for a jailbroken PS4 - with **your** operating system in it
 
 This is the same build that produces
 [PS4 XFCE Linux](https://github.com/shanerm420/ps4-linux-desktop), with the Linux
-distribution left out. You bring a rootfs; this repository turns it into a PS4
-PKG that installs it, boots it, and starts it afterwards, with the same menu, the
+distribution left out - and it is a separate project, with its own copy of the
+installer in `app/`. You bring a rootfs; this repository turns it into a PS4 PKG
+that installs it, boots it, and starts it afterwards, with the same menu, the
 same graphics-memory setting, the same autoload handling and the same recovery
 path. The result is named after what you put in it: **PS4 `NAME` Linux**.
 
@@ -17,7 +18,7 @@ test matrix is still `untested`. This kit inherits that status.
 
 | Part | Where it comes from |
 |---|---|
-| The app (menu, install, Start Linux, VRAM, autoload, recovery) | `scripts/vendor.sh` fetches it from [ps4-linux-desktop](https://github.com/shanerm420/ps4-linux-desktop) at a pinned tag, and renames it for you |
+| The app (menu, install, Start Linux, VRAM, autoload, recovery) | `app/` in this repository. `scripts/vendor.sh` copies it to `vendor/app` and renames it for you |
 | Kernel `bzImage` and `initramfs.cpio.gz` | you put them in `boot/` - take them out of a PS4 XFCE Linux package, or build them (see below) |
 | The Linux distribution | **yours**, in `distro/rootfs.tar.zst` |
 | Files you want added to it | `distro/overlay/` |
@@ -39,7 +40,7 @@ cp /path/to/your-rootfs.tar.zst distro/rootfs.tar.zst
 # 3. the two boot files, from a PS4 XFCE Linux package or built yourself
 cp bzImage initramfs.cpio.gz boot/
 
-# 4. the app source, renamed to your NAME
+# 4. the app source, copied to vendor/app and renamed to your NAME
 bash scripts/vendor.sh
 
 # 5. check the rootfs, then build
@@ -55,12 +56,6 @@ curl -LO https://github.com/OpenOrbis/OpenOrbis-PS4-Toolchain/releases/download/
 tar -xzf toolchain-llvm-18.tar.gz
 export OO_PS4_TOOLCHAIN=$PWD/OpenOrbis/PS4Toolchain
 ```
-
-No root on this machine? `bash scripts/bootstrap-toolchain.sh` builds a compiler
-and the tools a kernel needs - clang, lld, llvm-ar, llvm-objcopy, flex, bison, bc,
-pahole - inside your own home directory, with no sudo and no Docker. See
-[`docs/TOOLCHAIN.md`](docs/TOOLCHAIN.md) for how that works and what it does not
-solve.
 
 ## Where the boot files come from
 
@@ -129,7 +124,9 @@ one Linux at a time per console. The install location
 
 ## Licence
 
-The scripts here are MIT. The app is OpenOrbis (GPL-3.0) and comes from the other
-repository with its own notices. Your distribution keeps its own licences - do
-not bundle Sony-extracted blobs, and do not redistribute a distribution that
+The scripts here are MIT. The app in `app/` is OpenOrbis (GPL-3.0): a copy of the
+app published in [ps4-linux-desktop](https://github.com/shanerm420/ps4-linux-desktop),
+kept in this repository so the two projects are separate and this one builds on
+its own. It carries its own notices. Your distribution keeps its own licences -
+do not bundle Sony-extracted blobs, and do not redistribute a distribution that
 forbids it. See `NOTICE`.
