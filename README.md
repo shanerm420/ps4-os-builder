@@ -56,6 +56,12 @@ tar -xzf toolchain-llvm-18.tar.gz
 export OO_PS4_TOOLCHAIN=$PWD/OpenOrbis/PS4Toolchain
 ```
 
+No root on this machine? `bash scripts/bootstrap-toolchain.sh` builds a compiler
+and the tools a kernel needs - clang, lld, llvm-ar, llvm-objcopy, flex, bison, bc,
+pahole - inside your own home directory, with no sudo and no Docker. See
+[`docs/TOOLCHAIN.md`](docs/TOOLCHAIN.md) for how that works and what it does not
+solve.
+
 ## Where the boot files come from
 
 A PS4 PKG is just a container: the app inside it carries `assets/ps4linux/`, and
