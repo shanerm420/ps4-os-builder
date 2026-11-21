@@ -1,0 +1,27 @@
+PS4 OS Builder - the PS4 Linux build with the distribution left out.
+
+The scripts and documentation in this repository are MIT (see LICENSE).
+
+They fetch, and are meant to be used with, other people's work:
+
+  pkg/installer (the app)      OpenOrbis PS4 Toolchain, GPL-3.0, from
+                               github.com/shanerm420/ps4-linux-desktop
+  kernel (boot/bzImage)        Linux, GPL-2.0, from gitlab.com/rmuxnet/linux
+                               branch ps4/7.3.4; sources at
+                               github.com/shanerm420/ps4-linux-kernel
+  initramfs (boot/)            built from feeRnt/ps4-linux-initramfs (BSD-3)
+                               with the GPL-3.0 boot function
+  Mesa patch                   MIT (the patch is published with the Mesa it
+                               patches)
+
+Your distribution is yours: it keeps its own licences, and they are your problem
+and your responsibility. Two things not to do:
+
+  * do not bundle Sony-extracted blobs - liverpool_*.bin, gladius_*.bin, the EAP
+    HDD key. The loader takes those from OrbisOS memory at boot, which is what
+    keeps any of this distributable;
+  * do not redistribute a distribution whose licence forbids it (ChromeOS Flex is
+    the obvious example).
+
+Nothing here is supported by Sony. A jailbroken console can always be left in a
+state that needs recovery.

@@ -1,0 +1,13 @@
+# fetched by scripts/vendor.sh
+vendor/
+
+# build outputs
+out/
+
+# your operating system and the boot files - hundreds of megabytes, kept locally
+distro/rootfs.tar.zst
+distro/rootfs.tar.xz
+distro/rootfs.tar.gz
+distro/rootfs.tar
+boot/bzImage
+boot/initramfs.cpio.gz

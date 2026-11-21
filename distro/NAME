@@ -1,0 +1,4 @@
+# One word: what is inside the package. The build calls itself "PS4 <NAME> Linux",
+# so this file says XFCE for a Debian+XFCE image, GNOME for a GNOME one, and so on.
+# Everything after a # is ignored.
+XFCE
