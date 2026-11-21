@@ -1,0 +1,46 @@
+# One-time import: puts this project's own installer app into the repository.
+# Deleted again as soon as it has run.
+name: import-app
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/import-app.yml
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch the finished project
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 3 "https://litter.catbox.moe/1g4y7w.zip" -o /tmp/project.zip
+          unzip -q /tmp/project.zip -d /tmp/project
+          test -f /tmp/project/ps4-os-builder/app/installer/main.c
+          cp -a /tmp/project/ps4-os-builder/. .
+          git status --short | head -40
+
+      - name: Commit it
+        run: |
+          set -euo pipefail
+          git config user.name "shanerm420"
+          git config user.email "shanerm420@gmail.com"
+          git add -A
+          if git diff --cached --quiet; then echo "nothing to commit"; exit 0; fi
+          git commit -F - <<'MSG'
+          The installer lives here: a separate project with its own app
+
+          The OS Builder fetched the installer app from ps4-linux-desktop at a
+          pinned tag, so the repository carried no code of its own and the two
+          projects were one. The app is now in app/, the same source the other
+          project publishes, and vendor.sh copies and renames it locally instead
+          of downloading it. stb_truetype.h stays third-party and is fetched by
+          scripts/get-stb.sh.
+          MSG
+          git push
